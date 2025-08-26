@@ -1,0 +1,13 @@
+class Solution {
+    public String largestNumber(int[] nums) {
+        List<String> stringNumbers=new ArrayList<>();
+        for (int n:nums){
+            stringNumbers.add(String.valueOf(n));
+        }
+        stringNumbers.sort((s1,s2)-> (s2+s1).compareTo(s1+s2));
+        if("0".equals(stringNumbers.get(0))){
+            return "0";
+        }
+        return String.join("",stringNumbers);
+    }
+}
