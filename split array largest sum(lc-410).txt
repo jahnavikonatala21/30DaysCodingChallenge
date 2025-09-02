@@ -1,0 +1,39 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int st=Integer.MIN_VALUE;
+        int end=0;
+        int ans=-1;
+        for(int x:nums){
+            st=Math.max(st,x);
+            end+=x;
+        }
+        while(st<=end){
+            int mid=(st+end)/2;
+            if(isMin(nums,mid,k)){
+                ans=mid;
+                end=mid-1;
+            }else{
+                st=mid+1;
+            }
+        }
+        return ans;
+    }
+    public boolean isMin(int[] nums,int mid,int k){
+        int cnt=1;
+        int cursum=nums[0];
+        for(int i=1;i<nums.length;i++){
+            if(cursum+nums[i]>mid){
+                cnt++;
+                cursum=nums[i];
+            
+                if(cnt>k){
+                    return false;
+                }
+            }
+            else{
+                cursum+=nums[i];
+            }
+        }
+        return true;
+    }
+}
