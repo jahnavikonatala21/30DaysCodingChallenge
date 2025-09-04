@@ -1,0 +1,20 @@
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n=gas.length;
+        int startIndex=n-1;
+        int endIndex=n-1;
+        int gasstationsvisited=0;
+        int gasbalance=0;
+        while(gasstationsvisited<n){
+            gasbalance+=gas[endIndex]-cost[endIndex];
+            gasstationsvisited++;
+            endIndex=(endIndex+1)%n;
+            while(gasbalance < 0 && gasstationsvisited<n){
+                startIndex--;
+                gasbalance+=gas[startIndex]-cost[startIndex];
+                gasstationsvisited++;
+            }
+        }
+        return gasbalance<0?-1:startIndex;
+    }
+}

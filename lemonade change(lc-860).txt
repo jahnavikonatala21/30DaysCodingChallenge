@@ -1,0 +1,30 @@
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int fivedollarcnt=0;
+        int tendollarcnt=0;
+        for(int bill : bills){
+            switch(bill){
+                case 5:
+                    fivedollarcnt++;
+                    break;
+                case 10:
+                    tendollarcnt++;
+                    fivedollarcnt--;
+                    break;
+                case 20:
+                    if (tendollarcnt>0){
+                        tendollarcnt--;
+                        fivedollarcnt--;
+                    }
+                    else{
+                        fivedollarcnt-=3;
+                    }
+                    break;
+            }
+            if(fivedollarcnt<0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
